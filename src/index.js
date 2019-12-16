@@ -75,12 +75,13 @@ console.log(allDogs)
 
     toggle.addEventListener("click", e => {
         console.log(e.target)
+        while(dogBar.firstChild){dogBar.firstChild.remove()}
+        
+        console.log("before if:", dogBar)
+        
         if (toggle.innerText.includes("OFF")){
             toggle.innerText = "Filter good dogs: ON"
             let goodDogs = allDogs.filter(dog => dog.isGoodDog === true)
-            console.log(goodDogs)
-
-            while(dogBar.firstChild){dogBar.firstChild.remove()}
             
             goodDogs.forEach(function (dog) {
                 let dogSpan = document.createElement('span')
@@ -90,15 +91,10 @@ console.log(allDogs)
                 allDogs.push(dog)
              })
 
-        }else{
+        }else if(toggle.innerText.includes("ON")){
             toggle.innerText = "Filter good dogs: OFF"
-            
-            let badDogs = allDogs.filter(dog => dog.isGoodDog === false)
-            console.log(badDogs)
 
-            while(dogBar.firstChild){dogBar.firstChild.remove()}
-            
-            badDogs.forEach(function (dog) {
+            allDogs.forEach(function (dog) {
                 let dogSpan = document.createElement('span')
                 dogSpan.id = dog.id
                 dogSpan.innerText = dog.name
@@ -106,6 +102,7 @@ console.log(allDogs)
                 allDogs.push(dog)
              })
         }
+        console.log("afterif:", dogBar)
     })
 
 
